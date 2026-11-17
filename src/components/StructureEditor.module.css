@@ -1,0 +1,358 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* While dragging the preview onto the page the dialog gets out of the way */
+.hidden {
+  visibility: hidden;
+}
+
+.dialog {
+  width: min(760px, 94vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 10px 16px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.close {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.close:hover {
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+.content {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+}
+
+.hint {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.table {
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.table th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0 12px;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+}
+
+.table td {
+  border: 1px solid var(--border);
+  padding: 0;
+  min-width: 64px;
+  height: 32px;
+  text-align: center;
+}
+
+.index {
+  position: relative;
+  background: var(--bg-panel);
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.removeCol {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  line-height: 12px;
+  padding: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  opacity: 0;
+}
+.index:hover .removeCol {
+  opacity: 1;
+}
+.removeCol:hover {
+  color: var(--red);
+}
+
+.table input {
+  width: 100%;
+  min-width: 64px;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 6px;
+  text-align: center;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.table input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  background: var(--accent-subtle);
+}
+.table input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.labelInput {
+  color: var(--blue) !important;
+  font-weight: 500 !important;
+}
+
+.swatch {
+  display: block;
+  width: 100%;
+  height: 31px;
+  border: none;
+  cursor: pointer;
+  background-image: linear-gradient(135deg, transparent 48%, var(--border-accent) 48%, var(--border-accent) 52%, transparent 52%);
+}
+.swatch:hover {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.addCell {
+  background: var(--bg-panel);
+  min-width: 36px !important;
+}
+.addCell button {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+.addCell button:hover {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+.empty {
+  padding: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.tableActions {
+  display: flex;
+  gap: 6px;
+}
+
+.previewBox {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-base);
+  overflow: hidden;
+}
+.previewLabel {
+  padding: 5px 12px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+}
+.previewLabel span {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+.previewScroll {
+  padding: 8px;
+  max-height: 360px;
+  overflow: auto;
+  display: flex;
+}
+.preview {
+  margin: auto;
+  flex: none;
+}
+.draggable {
+  cursor: grab;
+  border-radius: var(--radius-sm);
+  outline: 1px dashed transparent;
+}
+.draggable:hover {
+  outline-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.tableActions button,
+.footer button {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+.tableActions button:hover:not(:disabled),
+.footer button:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+}
+.tableActions button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.footer .primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.footer .primary:hover {
+  background: var(--accent-dim);
+}
+
+/* grid editing */
+.rowHead {
+  position: sticky;
+  left: 0;
+  text-align: center !important;
+  min-width: 34px;
+}
+.removeRow {
+  margin-left: 4px;
+  padding: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  opacity: 0;
+}
+.rowHead:hover .removeRow {
+  opacity: 1;
+}
+.removeRow:hover {
+  color: var(--red);
+}
+.paintable,
+.paintable input {
+  cursor: crosshair;
+}
+
+.modeBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.modeBar > button {
+  font-size: 11px;
+  padding: 4px 12px;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+.modeBar > button:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+.modeBar > .modeOn {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.brushes {
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+.brush {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
+}
+.brushNone {
+  background-image: linear-gradient(135deg, transparent 46%, var(--text-muted) 46%, var(--text-muted) 54%, transparent 54%);
+}
+.brushOn {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* linked-list options */
+.options {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.options select {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-sm);
+  padding: 3px 6px;
+  font-family: inherit;
+  font-size: 11px;
+}
